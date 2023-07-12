@@ -1,37 +1,60 @@
 import dayjs from 'dayjs'
 import type { SpotType } from './types'
+import { css } from '@@/styled-system/css'
+import { stack } from '@@/styled-system/patterns'
+import { Center, Box, Stack } from '@@/styled-system/jsx'
+import { MyButton } from '../ui/MyButton'
 
 export const SpotBox = ({ spot }: { spot: SpotType }) => {
   const detailLink = `/spots/${spot.id}/`
 
   return (
-    <div className={'card shadow-md rounded-lg overflow-hidden'}>
+    <Box shadow='md' p={6} rounded='lg'>
       <a
         href={detailLink}
-        className={'inline-block hover:opacity-70 transition-opacity'}
+        className={stack({
+          transition: 'opacity 0.2s linear',
+          gap: 4,
+          _hover: {
+            opacity: 0.7,
+          },
+        })}
       >
-        <figure className={'block aspect-video bg-slate-200'}>
+        <figure
+          className={css({
+            bgColor: 'gray.50',
+            aspectRatio: '16/9',
+          })}
+        >
           <img
-            className={'aspect-video object-cover'}
+            className={css({
+              aspectRatio: '16/9',
+              objectFit: 'cover',
+            })}
             src={`/static/img/spots/thum-${spot.id}.jpg`}
             alt=''
           />
         </figure>
+        <Stack gap={0} lineHeight={1.7}>
+          <dl>
+            <dt
+              className={css({
+                fontSize: 'sm',
+                color: 'teal.600',
+                fontWeight: 500,
+              })}
+            >
+              {dayjs(spot.date).format('YYYY/MM/DD')}
+            </dt>
+            <dd>{spot.title}</dd>
+          </dl>
+          <Center>
+            <MyButton visual={'outline'} mt={4} px={16} rounded={'full'}>
+              詳細はこちら
+            </MyButton>
+          </Center>
+        </Stack>
       </a>
-      <div className='card-body leading-4'>
-        <div className='space-y-2'>
-          <div className={'text-sm'}>
-            {dayjs(spot.date).format('YYYY/MM/DD')}
-          </div>
-          <div>{spot.title}</div>
-        </div>
-        <a
-          href={detailLink}
-          className='btn mt-4 rounded-full btn-primary btn-outline'
-        >
-          <p>スポット詳細</p>
-        </a>
-      </div>
-    </div>
+    </Box>
   )
 }

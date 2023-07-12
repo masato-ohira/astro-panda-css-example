@@ -1,13 +1,14 @@
 ---
-import { MyHeader } from '@/components/layouts/MyHeader'
 import { MyFooter } from '@/components/layouts/MyFooter'
-import '@/styles/tailwind.scss'
-
+import { MyHeader } from '@/components/layouts/MyHeader'
+import { MyPageContainer } from '@/components/layouts/MyPageContainer'
+import '@/styles/app.css'
 export interface Props {
   title: string
 }
 
 const { title } = Astro.props
+const isDev = process.env.NODE_ENV == 'development'
 ---
 
 <!DOCTYPE html>
@@ -21,7 +22,9 @@ const { title } = Astro.props
   </head>
   <body>
     <MyHeader />
-    <slot />
+    <MyPageContainer>
+      <slot />
+    </MyPageContainer>
     <MyFooter />
   </body>
 </html>

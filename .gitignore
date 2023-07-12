@@ -1,6 +1,7 @@
 # my setting
 dist/
 .htaccess
+styled-system
 
 # generated types
 .astro/

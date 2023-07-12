@@ -1,23 +1,62 @@
-import { MyHStack } from '@/components/ui/MyHStack'
 import { MyIcon } from '../icons/MyIcon'
+import { css } from '@@/styled-system/css'
+import { hstack, center } from '@@/styled-system/patterns'
 
 export const MyHeader = () => {
   return (
-    <div className={'bg-primary text-white py-4 px-6'}>
-      <MyHStack className={'justify-between'}>
-        <a href='/'>
-          <MyHStack className={'space-x-3'}>
-            <div className={'text-4xl'}>
-              <MyIcon name={'react'} />
-            </div>
-            <div className={'text-3xl'}>DemoSite</div>
-          </MyHStack>
+    <div
+      className={hstack({
+        bgColor: 'teal.600',
+        color: 'white',
+        p: 6,
+        py: 4,
+        justifyContent: 'space-between',
+      })}
+    >
+      <a
+        href='/'
+        className={hstack({
+          cursor: 'pointer',
+          gap: 3,
+        })}
+      >
+        <MyIcon
+          name={'react'}
+          className={css({
+            fontSize: '4xl',
+          })}
+        />
+        <div
+          className={css({
+            fontSize: '3xl',
+            fontWeight: 500,
+          })}
+        >
+          DemoSite
+        </div>
+      </a>
+      <div>
+        <a
+          href='/'
+          className={center({
+            bgColor: 'white',
+            rounded: 'md',
+            w: 9,
+            h: 9,
+            _hover: {
+              opacity: 0.8,
+            },
+          })}
+        >
+          <MyIcon
+            name={'menu'}
+            className={css({
+              fontSize: 'xl',
+              color: 'teal.600',
+            })}
+          />
         </a>
-
-        <a href={'/'} className={'text-3xl inline-block'}>
-          <MyIcon name={'menu'} />
-        </a>
-      </MyHStack>
+      </div>
     </div>
   )
 }

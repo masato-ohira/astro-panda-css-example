@@ -1,35 +1,57 @@
-import React from 'react'
-import type { SpotType } from './types'
 import dayjs from 'dayjs'
+import { Center, Box } from '@@/styled-system/jsx'
+import { css } from '@@/styled-system/css'
+
+import type { SpotType } from './types'
 import { MyMarkdown } from '../ui/MyMarkdown'
-import { MyContainer } from '../ui/MyContainer'
+import { MyButton } from '../ui/MyButton'
 
 export const SpotDetail = ({ spot }: { spot: SpotType }) => {
   return (
-    <MyContainer className={'py-12 pb-24'}>
-      <h1 className={'text-4xl border-b pb-4 border-gray-300 mb-4'}>
+    <div>
+      <h1
+        className={css({
+          fontSize: '4xl',
+          borderBottom: '1px solid #ddd',
+          pb: 3,
+          mb: 3,
+        })}
+      >
         {spot.title}
       </h1>
-      <div className={'mb-4 text-right'}>
+
+      <Box mb={6} textAlign={'right'}>
         {dayjs(spot.date).format('YYYY/MM/DD')}
-      </div>
-      <figure className={'mb-12 display aspect-video bg-slate-200'}>
+      </Box>
+
+      <figure
+        className={css({
+          bgColor: 'gray.50',
+          aspectRatio: '16/9',
+          mb: 12,
+        })}
+      >
         <img
-          className={'block aspect-video object-cover'}
+          className={css({
+            aspectRatio: '16/9',
+            objectFit: 'cover',
+            display: 'block',
+            w: 'full',
+            h: 'auto',
+          })}
           src={`/static/img/spots/mv-${spot.id}.jpg`}
           alt=''
         />
       </figure>
       <MyMarkdown className={'markdown-body'}>{spot.body}</MyMarkdown>
 
-      <div className='text-center mt-16'>
-        <a
-          href={'/'}
-          className='btn text-lg w-72 btn-primary btn-outline rounded-full'
-        >
-          <span>一覧に戻る</span>
+      <Center mt={10}>
+        <a href={'/'}>
+          <MyButton visual={'outline'} size={'lg'} rounded={'full'} px={'16'}>
+            <span>一覧に戻る</span>
+          </MyButton>
         </a>
-      </div>
-    </MyContainer>
+      </Center>
+    </div>
   )
 }

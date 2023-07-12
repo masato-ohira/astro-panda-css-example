@@ -1,6 +1,14 @@
+import { center } from '@@/styled-system/patterns'
+
 export const MyFooter = () => {
   return (
-    <div className='flex justify-center text-white bg-zinc-800 py-5 px-7'>
+    <div
+      className={center({
+        p: 6,
+        color: 'white',
+        bgColor: 'gray.700',
+      })}
+    >
       <p>&copy; example.com</p>
     </div>
   )

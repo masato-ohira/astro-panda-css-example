@@ -1,5 +1,6 @@
 import MarkdownIt from 'markdown-it'
-import { twMerge } from 'tailwind-merge'
+import { Box, BoxProps } from '@@/styled-system/jsx'
+import { defineStyles } from '@pandacss/dev'
 
 const mdOptions: MarkdownIt.Options = {
   html: true,
@@ -9,23 +10,16 @@ const mdOptions: MarkdownIt.Options = {
 }
 const md = new MarkdownIt(mdOptions)
 
-type MarkdownProps = {
+interface MdProps extends BoxProps {
   children?: string
-  className?: string
 }
 
-export const MyMarkdown = (props: MarkdownProps) => {
+export const MyMarkdown = (props: MdProps) => {
   const { children, ...rest } = props
   const html: string = md.render(children || '')
-
-  const classNames = twMerge('', props.className)
-
   return (
     <>
-      <div
-        className={classNames}
-        dangerouslySetInnerHTML={{ __html: html }}
-      ></div>
+      <Box {...rest} dangerouslySetInnerHTML={{ __html: html }}></Box>
     </>
   )
 }
