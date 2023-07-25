@@ -1,15 +1,9 @@
-import { center } from '@@/styled-system/patterns'
+import { Center } from '@@/styled-system/jsx'
 
 export const MyFooter = () => {
   return (
-    <div
-      className={center({
-        p: 6,
-        color: 'white',
-        bgColor: 'gray.700',
-      })}
-    >
+    <Center p={6} color={'white'} bgColor={'gray.700'}>
       <p>&copy; example.com</p>
-    </div>
+    </Center>
   )
 }

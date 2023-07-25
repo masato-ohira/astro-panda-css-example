@@ -1,62 +1,48 @@
-import { MyIcon } from '../icons/MyIcon'
-import { css } from '@@/styled-system/css'
+import { Box, HStack, styled } from '@@/styled-system/jsx'
 import { hstack, center } from '@@/styled-system/patterns'
+import { MdMenu } from 'react-icons/md'
+import { FaReact } from 'react-icons/fa'
 
 export const MyHeader = () => {
   return (
-    <div
-      className={hstack({
-        bgColor: 'teal.600',
-        color: 'white',
-        p: 6,
-        py: 4,
-        justifyContent: 'space-between',
-      })}
+    <HStack
+      bgColor={'teal.600'}
+      color={'white'}
+      p={6}
+      py={4}
+      justifyContent={'space-between'}
     >
-      <a
-        href='/'
-        className={hstack({
-          cursor: 'pointer',
-          gap: 3,
-        })}
-      >
-        <MyIcon
-          name={'react'}
-          className={css({
-            fontSize: '4xl',
-          })}
-        />
-        <div
-          className={css({
-            fontSize: '3xl',
-            fontWeight: 500,
-          })}
-        >
+      <styled.a href={'/'} className={hstack()} gap={3} cursor={'pointer'}>
+        <Box fontSize={'4xl'}>
+          <FaReact />
+        </Box>
+        <Box fontSize={'3xl'} fontWeight={500}>
           DemoSite
-        </div>
-      </a>
-      <div>
-        <a
-          href='/'
-          className={center({
-            bgColor: 'white',
-            rounded: 'md',
-            w: 9,
-            h: 9,
-            _hover: {
-              opacity: 0.8,
-            },
-          })}
-        >
-          <MyIcon
-            name={'menu'}
-            className={css({
-              fontSize: 'xl',
-              color: 'teal.600',
-            })}
-          />
-        </a>
-      </div>
-    </div>
+        </Box>
+      </styled.a>
+
+      <HStack>
+        {['svelte', 'vue'].map((i) => {
+          return (
+            <styled.a
+              key={i}
+              href={`/${i}/`}
+              className={center()}
+              bgColor={'white'}
+              color={'teal.600'}
+              rounded={'md'}
+              px={8}
+              w={9}
+              h={9}
+              _hover={{
+                opacity: 0.9,
+              }}
+            >
+              {i}
+            </styled.a>
+          )
+        })}
+      </HStack>
+    </HStack>
   )
 }
